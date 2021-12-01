@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+
+ {# j'insere le block metatitle mais fait appel a la metatitle par defaut en utilisant la fonction parent + le metatitle "Articles"   #}
+
+
+{# j'insere le block main qui permet de mettre du contenu dans le main de ma page articles   #}
+{% block main %}
+    <section class="boxBook">
+
+        {% for book in books %}
+
+                <div id="contentBook">
+                    <h1 id="bookTitle">{{ book.title }}</h1>
+                    <p id="bookAuthor">Ecrit par {{ book.author }}</p>
+                    <p id="bookPublish">Publié le {{ book.publishedAt | date('d/m/y')}}</p>
+                    <img id="bookImg" src="{{ book.image }}" alt="{{ book.title }}">
+                    {#je créé un lien qui comporte path avec comme argument le name de la page et l'id qui reprend la valeur de id dans le tableau #}
+                    <a class="lien" href="{{ path('book', {'id': book.id}) }}">Voir le livre</a>
+                </div>
+
+        {% endfor %}
+    </section>
+{% endblock main %}

@@ -1,0 +1,141 @@
+*, body {
+    margin: 0;
+    padding: 0;
+}
+
+.main-menu, footer-menu {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.main-menu li a {
+    padding: 20px;
+    list-style: none;
+    text-decoration: none;
+}
+
+.main-menu li:not(:last-child) {
+    border-right: 1px solid black;
+
+
+    text-decoration: none;
+}
+
+.main-menu a {
+    color: black;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 20vh;
+    background-color: darkkhaki;
+}
+
+.divlogo {
+    width: 10%;
+
+}
+
+.logo {
+    width: 100%;
+    object-fit: cover;
+}
+
+footer {
+    display: flex;
+    background-color: black;
+    height: 20vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-menu {
+    display: flex;
+
+}
+
+.footer-menu li a {
+    padding: 20px;
+    list-style: none;
+    text-decoration: none;
+}
+
+.footer-menu li:not(:last-child) {
+    border-right: 1px solid black;
+
+
+    text-decoration: none;
+}
+
+.footer-menu a {
+    color: darkkhaki;
+}
+
+main {
+    height: 80vh;
+}
+.boxBook {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+
+}
+#contentBook {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+    "a  a"
+    "b  d"
+    "c  c";
+    text-align: center;
+    width: 30%;
+    border: 1px solid black;
+    margin: 0 auto;
+
+    border-radius: 40px;
+
+    box-shadow: 0px 3px 8px;
+    height: 60vh;
+    margin: 20px;
+
+}
+#bookTitle {
+    grid-area: a;
+    text-align: center;
+    background-color: darkkhaki;
+    border-radius: 40px 40px 0 0;
+    padding-top: 20px;
+}
+
+#bookAuthor {
+    grid-area: b;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#bookImg {
+
+    width: 200px;
+    height: 300px;
+    border-radius: 0 40px 0;
+    object-fit: cover;
+}
+#bookPublish {
+    grid-area: d;
+    width: 100%;
+    margin-top: 10px;
+}
+.divImg {
+    grid-area: c;
+    width: 200px;
+    height: 300px;
+    border-radius: 0 40px 0;
+
+}
+.lien {
+    margin: auto;
+}

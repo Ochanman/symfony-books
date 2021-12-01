@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bibliothèque</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+</head>
+<body>
+<header class="header">
+    <div class="divlogo">
+
+        <img class="logo" src="{{ asset('img/logo.png') }}"  alt="logo de bibliotheque"
+        />
+    </div>
+    <nav>
+        <ul class="main-menu">
+            <li><a href=""{{ path('home') }}">ACCUEIL</a></li>
+
+            <li><a href="{{ path('books') }}">LISTE DES LIVRES</a></li>
+
+        </ul>
+    </nav>
+
+</header>
+{% block main %}
+{% endblock main %}
+<footer>
+    <section class="foot">
+
+        <nav>
+            <ul class="footer-menu">
+                <li><a href=""{{ path('home') }}">accueil</a></li>
+
+                <li><a href="{{ path('books') }}">liste des livres</a></li>
+
+            </ul>
+        </nav>
+    </section>
+</footer>
+</body>
+</html>
