@@ -1,6 +1,11 @@
+@font-face {
+    font-family: "Roboto Regular";
+    src: url(../font/Roboto-Regular.ttf);
+}
 *, body {
     margin: 0;
     padding: 0;
+    font-family: "Roboto Regular";
 }
 
 .main-menu, footer-menu {
@@ -13,6 +18,8 @@
     padding: 20px;
     list-style: none;
     text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 .main-menu li:not(:last-child) {
@@ -77,12 +84,16 @@ footer {
 main {
     height: 80vh;
 }
+
 .boxBook {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     margin: 20px;
 
+
 }
+
 #contentBook {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
@@ -94,19 +105,18 @@ main {
     text-align: center;
     width: 30%;
     border: 1px solid black;
-    margin: 0 auto;
-
+    margin: 20px auto;
     border-radius: 40px;
-
     box-shadow: 0px 3px 8px;
-    height: 60vh;
-    margin: 20px;
-
+    height: 58vh;
+    overflow: hidden;
 }
+
 #bookTitle {
     grid-area: a;
     text-align: center;
     background-color: #C3D63C;
+    width: 100%;
     border-radius: 40px 40px 0 0;
     padding-top: 20px;
 }
@@ -114,25 +124,39 @@ main {
 #bookAuthor {
     grid-area: b;
     width: 100%;
-    margin-top: 20px;
+    margin:  20px auto;
+    text-align: center;
 }
 
-#bookImg {
 
-    width: 200px;
-    height: 300px;
-    border-radius: 0 40px 0;
-    object-fit: cover;
-}
+
+
 #bookPublish {
     grid-area: d;
     width: 100%;
-    margin:  auto;
+    margin: auto;
 }
-.divImg, .lien {
-    grid-area: c;
-    width: 200px;
-    height: 300px;
-    border-radius: 0 40px 0;
 
+#bookImg {
+    grid-area: c;
+    width: 100%;
+
+    border-radius: 0 40px 0;
+    object-fit: cover;
+
+}
+
+@media screen and (max-width: 960px) {
+    .boxBook {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
+
+    }
+
+    #contentBook {
+       display: flex;
+        flex-direction: column;
+    }
 }
