@@ -10,8 +10,10 @@
                 <h1 id="bookTitle">{{ book.title }}</h1>
                 <p id="bookAuthor">Ecrit par {{ book.author }}</p>
                 <p id="bookPublish">Publié le {{ book.publishedAt | date('d/m/y') }}</p>
-                <a class="lien" href="{{ path('book', {'id': book.id}) }}"><img id="bookImg" src="{{ book.image }}"
-                                                                                alt="{{ book.title }}"></a>
+                <a class="lien" href="{{ path('book', {'id': book.id}) }}">
+                    <img id="bookImg" src="{{ book.image }}" alt="{{ book.title }}">
+                </a>
             </div>
-        {% endfor %}</section>
+        {% endfor %}
+    </section>
 {% endblock main %}

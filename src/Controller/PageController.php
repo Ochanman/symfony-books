@@ -68,7 +68,7 @@ class PageController extends AbstractController
      * je crée une page book avec un id qui porte le nom "book"
      * @Route("/book/{id}", name="book")
      */
-    public function ShowBook($id)
+    public function showBook($id)
     {
         $books = [
             1 => [
@@ -123,7 +123,7 @@ class PageController extends AbstractController
      * je crée une page books qui porte le nom "books"
      * @Route("/books", name="books")
      */
-    public function ShowBooks()
+    public function showBooks()
     {
         $books = [
             1 => [
