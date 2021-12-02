@@ -11,8 +11,46 @@ class PageController extends AbstractController
      */
     public function home()
     {
-        return $this->render("home.html.twig");
+        $books = [
+            1 => [
+                "title" => "Dune",
+                "author" => "Franck Herbert",
+                "publishedAt" => new \DateTime('NOW'),
+                "image" => "https://images-na.ssl-images-amazon.com/images/I/41rDK8Jb1LL._SX312_BO1,204,203,200_.jpg",
+                "id" => 1
+            ],
+            2 => [
+                "title" => "Silo",
+                "author" => "Tery Hayes",
+                "publishedAt" => new \DateTime('NOW'),
+                "image" => "https://images-eu.ssl-images-amazon.com/images/I/41Y8vPpBFlL._SY291_BO1,204,203,200_QL40_ML2_.jpg",
+                "id" => 2
+            ],
+            3 => [
+                "title" => "Win",
+                "author" => "Harlan Coben",
+                "publishedAt" => new \DateTime('NOW'),
+                "image" => "https://images-eu.ssl-images-amazon.com/images/I/51IgnZIwYRS._SY291_BO1,204,203,200_QL40_ML2_.jpg",
+                "id" => 3
+            ],
+            4 => [
+                "title" => "La part de l'autre",
+                "author" => "Éric-Emmanuel Schmitt",
+                "publishedAt" => new \DateTime('NOW'),
+                "image" => "https://images-eu.ssl-images-amazon.com/images/I/41GpkWdUd6L._SY291_BO1,204,203,200_QL40_ML2_.jpg",
+                "id" => 4
+            ],
+            5 => [
+                "title" => "Snowman",
+                "author" => "Jo Nesbo",
+                "publishedAt" => new \DateTime('NOW'),
+                "image" => "https://images-na.ssl-images-amazon.com/images/I/51R4FsiUzlL._SX323_BO1,204,203,200_.jpg",
+                "id" => 5
+            ]
+        ];
+        return $this->render("home.html.twig", ["books" => $output = array_slice($books, -3, 3)]);
     }
+
 
     /**
      * @Route("/book/{id}", name="book")
@@ -24,30 +62,35 @@ class PageController extends AbstractController
                 "title" => "Dune",
                 "author" => "Franck Herbert",
                 "publishedAt" => new \DateTime('NOW'),
+                "image" => "https://images-na.ssl-images-amazon.com/images/I/41rDK8Jb1LL._SX312_BO1,204,203,200_.jpg",
                 "id" => 1
             ],
             2 => [
                 "title" => "Silo",
                 "author" => "Tery Hayes",
                 "publishedAt" => new \DateTime('NOW'),
+                "image" => "https://images-eu.ssl-images-amazon.com/images/I/41Y8vPpBFlL._SY291_BO1,204,203,200_QL40_ML2_.jpg",
                 "id" => 2
             ],
             3 => [
                 "title" => "Win",
                 "author" => "Harlan Coben",
                 "publishedAt" => new \DateTime('NOW'),
+                "image" => "https://images-eu.ssl-images-amazon.com/images/I/51IgnZIwYRS._SY291_BO1,204,203,200_QL40_ML2_.jpg",
                 "id" => 3
             ],
             4 => [
                 "title" => "La part de l'autre",
                 "author" => "Éric-Emmanuel Schmitt",
                 "publishedAt" => new \DateTime('NOW'),
+                "image" => "https://images-eu.ssl-images-amazon.com/images/I/41GpkWdUd6L._SY291_BO1,204,203,200_QL40_ML2_.jpg",
                 "id" => 4
             ],
             5 => [
                 "title" => "Snowman",
                 "author" => "Jo Nesbo",
                 "publishedAt" => new \DateTime('NOW'),
+                "image" => "https://images-na.ssl-images-amazon.com/images/I/51R4FsiUzlL._SX323_BO1,204,203,200_.jpg",
                 "id" => 5
             ]
         ];

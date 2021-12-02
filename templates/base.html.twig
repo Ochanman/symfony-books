@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bibliothèque</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <title>{% block metatitle %} Votre Bibliothèque {% endblock metatitle %} pour ceux qui aiment lire!</title>
+    {% block css %}
+        <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
+    {% endblock css %}
 </head>
 <body>
 <header class="header">
@@ -16,7 +18,7 @@
     </div>
     <nav>
         <ul class="main-menu">
-            <li><a href=""{{ path('home') }}">ACCUEIL</a></li>
+            <li><a href="{{ path('home') }}">ACCUEIL</a></li>
 
             <li><a href="{{ path('books') }}">LISTE DES LIVRES</a></li>
 
@@ -31,7 +33,7 @@
 
         <nav>
             <ul class="footer-menu">
-                <li><a href=""{{ path('home') }}">accueil</a></li>
+                <li><a href="{{ path('home') }}">accueil</a></li>
 
                 <li><a href="{{ path('books') }}">liste des livres</a></li>
 

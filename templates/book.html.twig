@@ -1,5 +1,11 @@
 {% extends "base.html.twig" %}
+{% block metatitle %}
+    Votre livre
+{% endblock metatitle %}
+{% block css %}
+    <link href="{{ asset('css/book.css') }}" type="text/css" rel="stylesheet">
+{% endblock css %}
 {# ici comme je n'ai pas inseré de block metatitle et css la page sera chargée avec les elements par defaut des blocks de base.html.twig plus tout le contenu de base.html.twig#}
 {% block main %}
-
+    {% include "_book.html.twig" %}
 {% endblock main %}

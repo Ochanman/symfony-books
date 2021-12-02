@@ -2,9 +2,8 @@
     <div id="contentBook">
         <h1 id="bookTitle">{{ book.title }}</h1>
         <p id="bookAuthor">Ecrit par {{ book.author }}</p>
-        <p id="bookPublish">{{ book.publishedAt }}</p>
-        <div class="divImg">
-            <img id="bookImg" src="{{ book.image }}" alt="{{ book.title }}">
-        </div>
+        <p id="bookPublish">Publié le {{ book.publishedAt | date('d/m/y')}}</p>
+        <img id="bookImg" src="{{ book.image }}" alt="{{ book.title }}">
+
     </div>
 </section>

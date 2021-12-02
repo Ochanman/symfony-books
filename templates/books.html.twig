@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
-
+{% block metatitle %}
+    Vos livres
+{% endblock metatitle %}
 
  {# j'insere le block metatitle mais fait appel a la metatitle par defaut en utilisant la fonction parent + le metatitle "Articles"   #}
 
@@ -14,9 +16,8 @@
                     <h1 id="bookTitle">{{ book.title }}</h1>
                     <p id="bookAuthor">Ecrit par {{ book.author }}</p>
                     <p id="bookPublish">Publié le {{ book.publishedAt | date('d/m/y')}}</p>
-                    <img id="bookImg" src="{{ book.image }}" alt="{{ book.title }}">
-                    {#je créé un lien qui comporte path avec comme argument le name de la page et l'id qui reprend la valeur de id dans le tableau #}
-                    <a class="lien" href="{{ path('book', {'id': book.id}) }}">Voir le livre</a>
+                    <a class="lien" href="{{ path('book', {'id': book.id}) }}"><img id="bookImg" src="{{ book.image }}" alt="{{ book.title }}"></a>
+
                 </div>
 
         {% endfor %}
