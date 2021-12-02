@@ -1,9 +1,9 @@
+{# je crée cette section afin de faire un include dans mon fichier book.html.twig #}
 <section class="boxBook">
     <div id="contentBook">
         <h1 id="bookTitle">{{ book.title }}</h1>
         <p id="bookAuthor">Ecrit par {{ book.author }}</p>
-        <p id="bookPublish">Publié le {{ book.publishedAt | date('d/m/y')}}</p>
+        <p id="bookPublish">Publié le {{ book.publishedAt | date('d/m/y') }}</p>
         <img id="bookImg" src="{{ book.image }}" alt="{{ book.title }}">
-
     </div>
 </section>

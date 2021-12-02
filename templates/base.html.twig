@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    {# je créé un block metatitle qui par defaut affichera "Votre Bibliothèque" #}
     <title>{% block metatitle %} Votre Bibliothèque {% endblock metatitle %} pour ceux qui aiment lire!</title>
+    {# je créé un block qui par defaut prendra ce style css, ce block sert de variable qui pourra etre inserer dans une page html et etre modifiée #}
     {% block css %}
         <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
     {% endblock css %}
@@ -13,7 +15,7 @@
 <header class="header">
     <div class="divlogo">
 
-        <img class="logo" src="{{ asset('img/logo.png') }}"  alt="logo de bibliotheque"
+        <img class="logo" src="{{ asset('img/logo.png') }}" alt="logo de bibliotheque"
         />
     </div>
     <nav>
@@ -26,6 +28,7 @@
     </nav>
 
 </header>
+{# ici un block main pour inserer le block twig selectionné #}
 {% block main %}
 {% endblock main %}
 <footer>

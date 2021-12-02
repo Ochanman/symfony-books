@@ -1,25 +1,29 @@
+{#je fais appel a la fonction extends qui me permet d inserer le contenu venant de base.html.twig#}
 {% extends "base.html.twig" %}
+
+{# j'insere le block metatitle mais fait appel a la place du metatitle par defaut le metatitle "Vos livres"   #}
 {% block metatitle %}
     Vos livres
 {% endblock metatitle %}
 
- {# j'insere le block metatitle mais fait appel a la metatitle par defaut en utilisant la fonction parent + le metatitle "Articles"   #}
+{# j'insere le block css et fait appel au css parent plus le book.css #}
+{% block css %}
+    {{ parent() }} <link href="{{ asset('css/books.css') }}" type="text/css" rel="stylesheet">
+{% endblock css %}
 
 
-{# j'insere le block main qui permet de mettre du contenu dans le main de ma page articles   #}
+
+{# j'insere le block main qui permet de mettre du contenu dans le main de ma page books   #}
+{# dans ce block la boucle for va permettre d'afficher tout le contenu du $array selectionné dans PageController.php   #}
 {% block main %}
     <section class="boxBook">
-
         {% for book in books %}
-
-                <div id="contentBook">
+            <div id="contentBook">
                     <h1 id="bookTitle">{{ book.title }}</h1>
                     <p id="bookAuthor">Ecrit par {{ book.author }}</p>
                     <p id="bookPublish">Publié le {{ book.publishedAt | date('d/m/y')}}</p>
                     <a class="lien" href="{{ path('book', {'id': book.id}) }}"><img id="bookImg" src="{{ book.image }}" alt="{{ book.title }}"></a>
-
-                </div>
-
+            </div>
         {% endfor %}
     </section>
 {% endblock main %}

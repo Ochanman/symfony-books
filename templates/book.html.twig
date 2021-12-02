@@ -1,11 +1,19 @@
+{#je fais appel a la fonction extends qui me permet d inserer le contenu venant de base.html.twig#}
 {% extends "base.html.twig" %}
+
+{# j'insere le block metatitle mais fait appel a la place du metatitle par defaut le metatitle "Votre livre"   #}
 {% block metatitle %}
     Votre livre
 {% endblock metatitle %}
+
+{# j'insere le block css et fait appel au css parent plus le book.css #}
 {% block css %}
-    <link href="{{ asset('css/book.css') }}" type="text/css" rel="stylesheet">
+    {{ parent() }} <link href="{{ asset('css/book.css') }}" type="text/css" rel="stylesheet">
 {% endblock css %}
-{# ici comme je n'ai pas inseré de block metatitle et css la page sera chargée avec les elements par defaut des blocks de base.html.twig plus tout le contenu de base.html.twig#}
+
+
+{# j'insere le block main qui permet de mettre du contenu dans le main de ma page book   #}
 {% block main %}
+ {# j'insere mon include de mon fichier _book.html.twig #}
     {% include "_book.html.twig" %}
 {% endblock main %}
