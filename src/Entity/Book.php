@@ -11,32 +11,85 @@ use App\Repository\BookRepository;
  */
 class Book
 {
+
     /**
      * @ORM\Id()
-     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string")
-     * */
+     * @ORM\Column(type="string", length=150)
+     */
     private $title;
 
     /**
      * @ORM\Column(type="string")
-     * */
+     */
     private $author;
 
     /**
      * @ORM\Column(type="integer")
-     * */
+     */
     private $nbPages;
 
     /**
      * @ORM\Column(type="date")
-     * */
-    private $PublishedAt;
+     */
+    private $publishedAt;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(string $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getNbPages(): ?int
+    {
+        return $this->nbPages;
+    }
+
+    public function setNbPages(int $nbPages): self
+    {
+        $this->nbPages = $nbPages;
+
+        return $this;
+    }
+
+    public function getPublishedAt(): ?\DateTimeInterface
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(\DateTimeInterface $publishedAt): self
+    {
+        $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
 
 }
