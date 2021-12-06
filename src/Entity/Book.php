@@ -1,11 +1,13 @@
 <?php
 
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BookRepository;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass=BookRepository::class)
  */
 class Book
 {
@@ -35,7 +37,6 @@ class Book
      * @ORM\Column(type="date")
      * */
     private $PublishedAt;
-
 
 
 }
