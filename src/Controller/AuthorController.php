@@ -70,7 +70,8 @@ class AuthorController extends AbstractController
     //  je créé une methose qui fait appel BookRepository et EntityManagerInterface
     public function authorUpdate($id, AuthorRepository $authorRepository, EntityManagerInterface $entityManager)
     {
-        // je mets dans une variable le contenu de l'id selectionné via la methode find de la classe $bookRepository
+        // je mets dans une variable le contenu d'un author avec l id de recuperé dans l'url via la methode
+        // find de la classe $bookRepository
         $author = $authorRepository->find($id);
         // je modifie le contenu de cette variable via le setter
         $author->setLastName("Petit");

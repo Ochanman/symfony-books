@@ -72,7 +72,8 @@ class BookController extends AbstractController
         //  je créé une methose qui fait appel BookRepository et EntityManagerInterface
         public function bookUpdate($id, BookRepository $bookRepository, EntityManagerInterface $entityManager)
     {
-        // je mets dans une variable le contenu de l'id selectionné via la methode find de la classe $bookRepository
+        // je mets dans une variable le contenu d'un book avec l id de recuperé dans l'url via la methode
+        // find de la classe $bookRepository
         $book = $bookRepository->find($id);
         // je modifie le contenu de cette variable via le setter
         $book->setTitle("L'Étrange Cas du docteur Jekyll et de M. Hyde le retour");
