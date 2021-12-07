@@ -63,5 +63,23 @@ class AuthorController extends AbstractController
         return $this->render("author.html.twig", ["author" => $author]);
     }
 
+    /**
+     *  je crée une page update avec un id qui porte le nom "author_update"
+     * @Route("/author/update/{id}", name="author_update")
+     */
+    //  je créé une methose qui fait appel BookRepository et EntityManagerInterface
+    public function authorUpdate($id, AuthorRepository $authorRepository, EntityManagerInterface $entityManager)
+    {
+        // je mets dans une variable le contenu de l'id selectionné via la methode find de la classe $bookRepository
+        $author = $authorRepository->find($id);
+        // je modifie le contenu de cette variable via le setter
+        $author->setLastName("Petit");
+        // j'utilise la classe EntityManager , elle me permet de persister mon entité afin de faire la
+        // modification dans la BDD puis j'effectue la modification via Flush qui génère et éxecute la requête SQL
+        $entityManager->persist($author);
+        $entityManager->flush();
+        // puis je me rends a la page author/update
+        return $this->render('author_update.html.twig');
+    }
 
 }

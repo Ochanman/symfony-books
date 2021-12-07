@@ -65,5 +65,26 @@ class BookController extends AbstractController
         return $this->render('book_create.html.twig');
 
     }
+    /**
+     * je crée une page update avec un id qui porte le nom "book_update"
+     * @Route("/book/update/{id}", name="book_update")
+     */
+        //  je créé une methose qui fait appel BookRepository et EntityManagerInterface
+        public function bookUpdate($id, BookRepository $bookRepository, EntityManagerInterface $entityManager)
+    {
+        // je mets dans une variable le contenu de l'id selectionné via la methode find de la classe $bookRepository
+        $book = $bookRepository->find($id);
+        // je modifie le contenu de cette variable via le setter
+        $book->setTitle("L'Étrange Cas du docteur Jekyll et de M. Hyde le retour");
+        // j'utilise la classe EntityManager , elle me permet de persister mon entité afin de faire la
+        // modification dans la BDD puis j'effectue la modification via Flush qui génère et éxecute la requête SQL
+        $entityManager->persist($book);
+        $entityManager->flush();
+        // puis je me rends a la page book/update
+        return $this->render('book_update.html.twig');
+    }
+
+
+
 
 }
