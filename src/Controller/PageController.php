@@ -46,37 +46,5 @@ class PageController extends AbstractController
     }
 
 
-    /**
-     * je crée une page book avec un id qui porte le nom "book"
-     * @Route("/book/{id}", name="book")
-     */
-    public function showBook($id, BookRepository $bookRepository)
-    {
 
-
-//        j'utilise une condition avec la fonction native de PHP "array_key_exists" afin de verifier que l'id donné
-//        dans l'url soit bien comprise dans le array, si non j'utilise la methode createNotFoundException de Symfony
-//        pour renvoyer une erreur 404
-//        if (!array_key_exists($id, $this->books)) {
-//            throw $this->createNotFoundException('Petit malin! tu n\'as rien à faire ici!!!');
-//        }
-
-            $book = $bookRepository->find($id);
-
-//je cree une variable article qui renvoi a twing la partie de tableau comportant l'id via la methode render
-        return $this->render("book.html.twig", ["book" => $book]);
-
-    }
-
-    /**
-     * je crée une page books qui porte le nom "books"
-     * @Route("/books", name="books")
-     */
-    public function showBooks(BookRepository $bookRepository)
-    {
-        $books = $bookRepository->findAll();
-
-        //je renvoi a twing le tableau via la methode render
-        return $this->render("books.html.twig", ["books" => $books]);
-    }
 }
