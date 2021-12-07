@@ -17,7 +17,7 @@ class AuthorController extends AbstractController
      */
     public function createAuthor()
     {
-        // j'instancie la class Author pour en suite integrer des valeurs via les methodes "seter"
+        // j'instancie la class Author pour en suite integrer des valeurs via les methodes "setter"
         $author = new Author();
         $author->setFirstName("Jo");
         $author->setLastName("Nesbo");

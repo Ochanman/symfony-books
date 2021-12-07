@@ -43,7 +43,7 @@ class BookController extends AbstractController
      */
     public function createBook()
     {
-        // j'instancie la class Book pour en suite integrer des valeurs via les methodes "seter"
+        // j'instancie la class Book pour en suite integrer des valeurs via les methodes "setter"
         $book = new Book();
         $book->setTitle("Snowman");
         $book->setAuthor("Jo Nesbo");
