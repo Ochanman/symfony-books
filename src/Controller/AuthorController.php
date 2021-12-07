@@ -3,6 +3,8 @@
 namespace App\Controller;
 //j'ajoute le parametre App\Entity\Author pour pouvoir utiliser la classe Author
 use App\Entity\Author;
+use Doctrine\ORM\EntityManagerInterface;
+//j'ajoute le parametre EntityManagerInterface pour pouvoir utiliser sa classe
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AuthorRepository;
@@ -15,16 +17,24 @@ class AuthorController extends AbstractController
      * je crée une page /author/create qui porte le nom "author_create"
      *@Route("/author/create", name="author_create")
      */
-    public function createAuthor()
+    public function createAuthor(EntityManagerInterface $entityManager)
     {
-        // j'instancie la class Author pour en suite integrer des valeurs via les methodes "setter"
+        // Je créé une nouvelle instance de la classe Author (de l'entité Author)
+        // dans le but de l'enregistrer en bdd valeurs via les methodes "setter"
+        // Doctrine prendra l'entité avec les valeurs de chacune des propriétés
+        // et créera un enregistrement dans la table Author
         $author = new Author();
         $author->setFirstName("Jo");
         $author->setLastName("Nesbo");
+        // une fois l'entité créée, j'utilise la classe EntityManager
+        // je demande à Symfony de l'instancier pour moi (grâce au système
+        // d'autowire)
+        // cette classe me permet de persister mon entité (de préparer sa sauvegarde
+        // en bdd), puis d'effectuer l'enregistrement (génère et éxecute une requête SQL)
+        $entityManager->persist($author);
+        $entityManager->flush();
 
-
-        //  je fais un dump pour controler le contenu de $book
-        dump($author); die;
+        return $this->render('author_create.html.twig');
 
     }
 
@@ -52,5 +62,6 @@ class AuthorController extends AbstractController
         //je renvoi a twing le tableau via la methode render
         return $this->render("author.html.twig", ["author" => $author]);
     }
+
 
 }

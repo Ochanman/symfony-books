@@ -3,6 +3,8 @@
 namespace App\Controller;
 //j'ajoute le parametre App\Entity\Book pour pouvoir utiliser la classe Book
 use App\Entity\Book;
+use Doctrine\ORM\EntityManagerInterface;
+//j'ajoute le parametre EntityManagerInterface pour pouvoir utiliser sa classe
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\BookRepository;
@@ -41,17 +43,26 @@ class BookController extends AbstractController
      * je crée une page /books/create qui porte le nom "book_create"
      *@Route("/book/create", name="book_create")
      */
-    public function createBook()
+    public function createBook(EntityManagerInterface $entityManager)
     {
-        // j'instancie la class Book pour en suite integrer des valeurs via les methodes "setter"
+        // Je créé une nouvelle instance de la classe Book (de l'entité Book)
+        // dans le but de l'enregistrer en bdd valeurs via les methodes "setter"
+        // Doctrine prendra l'entité avec les valeurs de chacune des propriétés
+        // et créera un enregistrement dans la table Book
         $book = new Book();
         $book->setTitle("Snowman");
         $book->setAuthor("Jo Nesbo");
         $book->setNbPages(700);
         $book->setPublishedAt(new \DateTime(2010-12-02));
+        // une fois l'entité créée, j'utilise la classe EntityManager
+        // je demande à Symfony de l'instancier pour moi (grâce au système
+        // d'autowire)
+        // cette classe me permet de persister mon entité (de préparer sa sauvegarde
+        // en bdd), puis d'effectuer l'enregistrement (génère et éxecute une requête SQL)
+        $entityManager->persist($book);
+        $entityManager->flush();
 
-        //  je fais un dump pour controler le contenu de $book
-        dump($book); die;
+        return $this->render('book_create.html.twig');
 
     }
 
