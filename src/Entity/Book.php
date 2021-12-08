@@ -45,7 +45,7 @@ class Book
     private $genre;
 
     /**
-     * j'utilise la methode ManyToOne car plusieurs books peuvent être associés à un même author pour joindre
+     * j'utilise l'annotation ManyToOne car un book peuvent être associés à un seul author pour joindre
      * la table book a la table author et et j'utilise la propriété inversedBy pour demander à Symfony de faire
      * l'inverse pour la table author (OneToMany)
      * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books")
