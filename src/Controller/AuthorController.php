@@ -82,5 +82,23 @@ class AuthorController extends AbstractController
         // puis je me rends a la page author/update
         return $this->render('author_update.html.twig');
     }
+    /**
+     * je créé une route /author/delete qui attend un id et porte le nom author_delete
+     *@Route("/author/delete/{id}", name="author_delete")
+     */
+    // je créé ne methode avec en parametre l'id, la classe AuthorRepository instanciée dans la variable
+    // $authorRepository et la classe EntityManagerInterface qui est instanciée dans la variable $entityManager
+    public function authorDelete($id, AuthorRepository $authorRepository, EntityManagerInterface $entityManager)
+    {
+        // je mets dans la variable $author le resultat de l'author portant l'id que l on, aura recupéré dans l'url
+        // en utilisant la methode find de la classe AuthorRepository
+        $author = $authorRepository->find($id);
+        // j'utilise la methode remove de la classe EntityManagerInterface pour preparer la suppression
+        $entityManager->remove($author);
+        // j'utilise la methode flush de la classe EntityManagerInterface pour appliquer la suppression
+        $entityManager->flush();
+        //je retourne sur la page author_delete
+        return $this->render('author_delete.html.twig');
+    }
 
 }

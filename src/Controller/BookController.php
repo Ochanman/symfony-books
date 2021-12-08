@@ -86,6 +86,25 @@ class BookController extends AbstractController
     }
 
 
+        /**
+         * je créé une route /book/delete qui attend un id et porte le nom book_delete
+         *@Route("/book/delete/{id}", name="book_delete")
+         */
+        // je créé ne methode avec en parametre l'id, la classe BookRepository instanciée dans la variable
+        // $bookRepository et la classe EntityManagerInterface qui est instanciée dans la variable $entityManager
+        public function bookDelete($id, BookRepository $bookRepository, EntityManagerInterface $entityManager)
+        {
+        // je mets dans la variable $book le resultat du livre portant l'id que l on, aura recupéré dans l'url
+        // en utilisant la methode find de la classe BookRepository
+            $book = $bookRepository->find($id);
+        // j'utilise la methode remove de la classe EntityManagerInterface pour preparer la suppression
+            $entityManager->remove($book);
+        // j'utilise la methode flush de la classe EntityManagerInterface pour appliquer la suppression
+            $entityManager->flush();
+        //je retourne sur la page book_delete
+            return $this->render('book_delete.html.twig');
+        }
+
 
 
 }
