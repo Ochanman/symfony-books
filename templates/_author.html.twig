@@ -6,6 +6,9 @@
         {% if author.deathdate %}
         <p id="bookPublish">Décédé le {{ author.deathdate | date('d/m/Y')}}</p>
         {% endif %}
+        {% for book in author.books %}
+            <p>Cet auteur a ecrit: {{ book.title }}</p>
+        {% endfor %}
         {#                    <a class="lien" href="{{ path('book', {'id': book.id}) }}"><img id="bookImg" src="{{ book.image }}" alt="{{ book.title }}"></a>#}
     </div>
 </section>

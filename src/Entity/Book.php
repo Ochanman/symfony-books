@@ -36,16 +36,18 @@ class Book
      */
     private $publishedAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Author::class)
-     */
-    private $author;
+
 
     /**
      * @ORM\ManyToOne(targetEntity=Genre::class)
      * @ORM\JoinColumn(name="genre_id", referencedColumnName="id", nullable=false)
      */
     private $genre;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books")
+     */
+    private $author;
 
     public function getId(): ?int
     {
@@ -90,17 +92,9 @@ class Book
         return $this;
     }
 
-    public function getAuthor(): ?Author
-    {
-        return $this->author;
-    }
 
-    public function setAuthor(?Author $author): self
-    {
-        $this->author = $author;
 
-        return $this;
-    }
+
 
     public function getGenre(): ?Genre
     {
@@ -110,6 +104,18 @@ class Book
     public function setGenre(?Genre $genre): self
     {
         $this->genre = $genre;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
