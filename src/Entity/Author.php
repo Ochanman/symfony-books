@@ -35,6 +35,9 @@ class Author
     private $deathDate;
 
     /**
+     * j'utilise la methode OneToMany car un seul author peut être associés à plusieurs books pour joindre
+     * la table author a la table book et et j'utilise la propriété mappedBy pour demander à Symfony de faire
+     * l'inverse pour la table book (ManyToOne)
      * @ORM\OneToMany(targetEntity=Book::class, mappedBy="author")
      */
     private $books;
