@@ -110,20 +110,49 @@ class AdminBookController extends AbstractController
      * @Route("/admin/book/update/{id}", name="admin_book_update")
      */
         //  je créé une methose qui fait appel BookRepository et EntityManagerInterface
-        public function bookUpdate($id, BookRepository $bookRepository, EntityManagerInterface $entityManager)
-    {
-        // je mets dans une variable le contenu d'un book avec l id de recuperé dans l'url via la methode
-        // find de la classe $bookRepository
-        $book = $bookRepository->find($id);
-        // je modifie le contenu de cette variable via le setter
-        $book->setTitle("L'Étrange Cas du docteur Jekyll et de M. Hyde le retour");
-        // j'utilise la classe EntityManager , elle me permet de persister mon entité afin de faire la
-        // modification dans la BDD puis j'effectue la modification via Flush qui génère et éxecute la requête SQL
-        $entityManager->persist($book);
-        $entityManager->flush();
-        // puis je me rends a la page book/update
-        return $this->render('admin/book_update.html.twig');
-    }
+        public function bookUpdate($id, Request $request, BookRepository $bookRepository, EntityManagerInterface $entityManager)
+        {
+            // je mets dans une variable le contenu d'un book avec l id de recuperé dans l'url via la methode
+            // find de la classe $bookRepository
+            $book = $bookRepository->find($id);
+            $form = $this->createForm(BookType::class, $book);
+
+            // avec la methode handleRequest j'associe le formulaire à $request
+            $form->handleRequest($request);
+
+            //  avec la methode isSubmitted je verifie si le formulaire a été soumis et avec la methode isValid verifie sa validité
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                // cette classe permet de préparer sa sauvegarde en bdd
+                $entityManager->persist($book);
+
+                // cette classe permet de génèrer et éxecuter la requête SQL
+                $entityManager->flush();
+            }
+
+            // je renvoie le formulaire créé mis en forme via la methode render sur la page admin/book_create.html.twig
+            return $this->render("admin/book_update.html.twig", [
+                'bookForm' => $form->createView()
+            ]);
+
+        }
+
+
+
+
+
+
+
+
+//        // je modifie le contenu de cette variable via le setter
+//        $book->setTitle("L'Étrange Cas du docteur Jekyll et de M. Hyde le retour");
+//        // j'utilise la classe EntityManager , elle me permet de persister mon entité afin de faire la
+//        // modification dans la BDD puis j'effectue la modification via Flush qui génère et éxecute la requête SQL
+//        $entityManager->persist($book);
+//        $entityManager->flush();
+//        // puis je me rends a la page book/update
+//        return $this->render('admin/book_update.html.twig');
+//    }
 
 
         /**
