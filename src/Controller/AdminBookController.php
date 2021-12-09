@@ -58,7 +58,7 @@ class AdminBookController extends AbstractController
         // avec la methode handleRequest j'associe le formulaire à $request
         $form->handleRequest($request);
 
-        //  avec la methode isSubmitted je verifie si le formulaire a été soumis et verifie sa validité
+        //  avec la methode isSubmitted je verifie si le formulaire a été soumis et avec la methode isValid verifie sa validité
         if ($form->isSubmitted() && $form->isValid()) {
 
            // cette classe permet de préparer sa sauvegarde en bdd
