@@ -3,6 +3,7 @@
 namespace App\Controller;
 //j'ajoute le parametre App\Entity\Book pour pouvoir utiliser la classe Book
 use App\Entity\Book;
+use App\Form\BookType;
 use Doctrine\ORM\EntityManagerInterface;
 //j'ajoute le parametre EntityManagerInterface pour pouvoir utiliser sa classe
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,29 +42,52 @@ class AdminBookController extends AbstractController
     }
 
     /**
-     * je crée une page /books/create qui porte le nom "book_create"
+     * je crée une page /admin/book/create qui porte le nom "admin_book_create"
      *@Route("/admin/book/create", name="admin_book_create")
      */
-    public function createBook(EntityManagerInterface $entityManager)
+    public function createBook()
     {
-        // Je créé une nouvelle instance de la classe Book (de l'entité Book)
-        // dans le but de l'enregistrer en bdd valeurs via les methodes "setter"
-        // Doctrine prendra l'entité avec les valeurs de chacune des propriétés
-        // et créera un enregistrement dans la table Book
+        //je crée une instance de mon entity Book dans ma variable $book
         $book = new Book();
-        $book->setTitle("Snowman");
-        $book->setAuthor("Jo Nesbo");
-        $book->setNbPages(700);
-        $book->setPublishedAt(new \DateTime(2010-12-02));
-        // une fois l'entité créée, j'utilise la classe EntityManager
-        // je demande à Symfony de l'instancier pour moi (grâce au système
-        // d'autowire)
-        // cette classe me permet de persister mon entité (de préparer sa sauvegarde
-        // en bdd), puis d'effectuer l'enregistrement (génère et éxecute une requête SQL)
-        $entityManager->persist($book);
-        $entityManager->flush();
+        // j'utilise la methode creatForm de la classe AbstractController pour que symfony créé un formulaire
+        // par rapport à $Book
+        $form = $this->createForm(BookType::class, $book);
 
-        return $this->render('admin/book_create.html.twig');
+        // je renvoie le formulaire créé mis en forme via la methode render sur la page admin/book_create.html.twig
+        return $this->render("admin/book_create.html.twig", [
+            'bookForm' => $form->createView()
+    ]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        // Je créé une nouvelle instance de la classe Book (de l'entité Book)
+//        // dans le but de l'enregistrer en bdd valeurs via les methodes "setter"
+//        // Doctrine prendra l'entité avec les valeurs de chacune des propriétés
+//        // et créera un enregistrement dans la table Book
+//        $book = new Book();
+//        $book->setTitle("Snowman");
+//        $book->setAuthor("Jo Nesbo");
+//        $book->setNbPages(700);
+//        $book->setPublishedAt(new \DateTime(2010-12-02));
+//        // une fois l'entité créée, j'utilise la classe EntityManager
+//        // je demande à Symfony de l'instancier pour moi (grâce au système
+//        // d'autowire)
+//        // cette classe me permet de persister mon entité (de préparer sa sauvegarde
+//        // en bdd), puis d'effectuer l'enregistrement (génère et éxecute une requête SQL)
+//        $entityManager->persist($book);
+//        $entityManager->flush();
+//
+//        return $this->render('admin/book_create.html.twig');
 
     }
     /**
