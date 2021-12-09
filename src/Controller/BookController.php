@@ -102,8 +102,8 @@ class BookController extends AbstractController
             $entityManager->remove($book);
         // j'utilise la methode flush de la classe EntityManagerInterface pour appliquer la suppression
             $entityManager->flush();
-        //je retourne sur la page book_delete
-            return $this->render('book_delete.html.twig');
+        //je redirige sur la route books apres avoir supprimé
+            return $this->redirectToRoute('books');
         }
 
 

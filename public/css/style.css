@@ -96,12 +96,13 @@ main {
 
 #contentBook {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
     "a  a"
     "b  b"
-    "c  d";
+    "c  d"
+    "c  e";
     text-align: center;
     width: 30%;
     border: 1px solid black;
@@ -135,6 +136,9 @@ main {
     grid-area: d;
     width: 100%;
     margin: auto;
+}
+.lien {
+    grid-area: e;
 }
 
 #bookImg {
