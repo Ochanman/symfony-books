@@ -9,12 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\BookRepository;
 
-class BookController extends AbstractController
+class AdminBookController extends AbstractController
 {
     /**
      * je crée une page book avec un id qui porte le nom "book" et j'ajoute un requirements pour que id
      * devienne un integer
-     * @Route("/book/{id}", name="book", requirements={"id"="\d+"})
+     * @Route("/admin/book/{id}", name="admin_book", requirements={"id"="\d+"})
      */
     public function showBook($id, BookRepository $bookRepository)
     {
@@ -24,25 +24,25 @@ class BookController extends AbstractController
         $book = $bookRepository->find($id);
 
 //je cree une variable article qui renvoi a twing la partie de tableau comportant l'id via la methode render
-        return $this->render("book.html.twig", ["book" => $book]);
+        return $this->render("admin/book.html.twig", ["book" => $book]);
 
     }
 
     /**
      * je crée une page books qui porte le nom "books"
-     * @Route("/books", name="books")
+     * @Route("/admin/books", name="admin_books")
      */
     public function showBooks(BookRepository $bookRepository)
     {
         $books = $bookRepository->findAll();
 
         //je renvoi a twing le tableau via la methode render
-        return $this->render("books.html.twig", ["books" => $books]);
+        return $this->render("admin/books.html.twig", ["books" => $books]);
     }
 
     /**
      * je crée une page /books/create qui porte le nom "book_create"
-     *@Route("/book/create", name="book_create")
+     *@Route("/admin/book/create", name="admin_book_create")
      */
     public function createBook(EntityManagerInterface $entityManager)
     {
@@ -63,12 +63,12 @@ class BookController extends AbstractController
         $entityManager->persist($book);
         $entityManager->flush();
 
-        return $this->render('book_create.html.twig');
+        return $this->render('admin/book_create.html.twig');
 
     }
     /**
      * je crée une page update avec un id qui porte le nom "book_update"
-     * @Route("/book/update/{id}", name="book_update")
+     * @Route("/admin/book/update/{id}", name="admin_book_update")
      */
         //  je créé une methose qui fait appel BookRepository et EntityManagerInterface
         public function bookUpdate($id, BookRepository $bookRepository, EntityManagerInterface $entityManager)
@@ -83,13 +83,13 @@ class BookController extends AbstractController
         $entityManager->persist($book);
         $entityManager->flush();
         // puis je me rends a la page book/update
-        return $this->render('book_update.html.twig');
+        return $this->render('admin/book_update.html.twig');
     }
 
 
         /**
          * je créé une route /book/delete qui attend un id et porte le nom book_delete
-         *@Route("/book/delete/{id}", name="book_delete")
+         *@Route("/admin/book/delete/{id}", name="admin_book_delete")
          */
         // je créé ne methode avec en parametre l'id, la classe BookRepository instanciée dans la variable
         // $bookRepository et la classe EntityManagerInterface qui est instanciée dans la variable $entityManager
@@ -103,7 +103,7 @@ class BookController extends AbstractController
         // j'utilise la methode flush de la classe EntityManagerInterface pour appliquer la suppression
             $entityManager->flush();
         //je redirige sur la route books apres avoir supprimé
-            return $this->redirectToRoute('books');
+            return $this->redirectToRoute('admin_books');
         }
 
 

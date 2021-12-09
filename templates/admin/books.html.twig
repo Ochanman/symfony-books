@@ -24,8 +24,8 @@
                     <p id="bookAuthor">Ecrit par {{ book.author.firstname }} {{ book.author.lastname }}</p>
                 {% endif %}
                     <p id="bookPublish">Publié le {{ book.publishedAt | date('d/m/y')}}</p>
-                <a class="lien" href="{{ path('book', {'id': book.id}) }}">Voir ce livre</a>
-                <a class="lien" href="{{ path('book_delete', {'id': book.id}) }}">Supprimer ce livre</a>
+                <a class="lien" href="{{ path('admin_book', {'id': book.id}) }}">Voir ce livre</a>
+                <a class="lien" href="{{ path('admin_book_delete', {'id': book.id}) }}">Supprimer ce livre</a>
 {#<a class="lien" href="{{ path('book', {'id': book.id}) }}"><img id="bookImg" src="{{ book.image }}" alt="{{ book.title }}"></a>#}
             </div>
         {% endfor %}
