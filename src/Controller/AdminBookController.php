@@ -6,6 +6,7 @@ use App\Entity\Book;
 use App\Form\BookType;
 use Doctrine\ORM\EntityManagerInterface;
 //j'ajoute le parametre EntityManagerInterface pour pouvoir utiliser sa classe
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\BookRepository;
@@ -45,13 +46,27 @@ class AdminBookController extends AbstractController
      * je crée une page /admin/book/create qui porte le nom "admin_book_create"
      *@Route("/admin/book/create", name="admin_book_create")
      */
-    public function createBook()
+//    je créé une methode qui utilise les classes Request et EntityManagerInterface
+    public function createBook(Request $request, EntityManagerInterface $entityManager)
     {
         //je crée une instance de mon entity Book dans ma variable $book
         $book = new Book();
         // j'utilise la methode creatForm de la classe AbstractController pour que symfony créé un formulaire
         // par rapport à $Book
         $form = $this->createForm(BookType::class, $book);
+
+        // avec la methode handleRequest j'associe le formulaire à $request
+        $form->handleRequest($request);
+
+        //  avec la methode isSubmitted je verifie si le formulaire a été soumis et verifie sa validité
+        if ($form->isSubmitted() && $form->isValid()) {
+
+           // cette classe permet de préparer sa sauvegarde en bdd
+            $entityManager->persist($book);
+
+            // cette classe permet de génèrer et éxecuter la requête SQL
+            $entityManager->flush();
+        }
 
         // je renvoie le formulaire créé mis en forme via la methode render sur la page admin/book_create.html.twig
         return $this->render("admin/book_create.html.twig", [

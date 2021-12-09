@@ -40,7 +40,7 @@ class Book
 
     /**
      * @ORM\ManyToOne(targetEntity=Genre::class)
-     * @ORM\JoinColumn(name="genre_id", referencedColumnName="id", nullable=false)
+     *
      */
     private $genre;
 
