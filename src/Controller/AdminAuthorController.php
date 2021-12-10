@@ -3,88 +3,105 @@
 namespace App\Controller;
 //j'ajoute le parametre App\Entity\Author pour pouvoir utiliser la classe Author
 use App\Entity\Author;
+use App\Form\AuthorType;
 use Doctrine\ORM\EntityManagerInterface;
 //j'ajoute le parametre EntityManagerInterface pour pouvoir utiliser sa classe
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AuthorRepository;
+use Symfony\Component\HttpFoundation\Request;
 
-
-class AuthorController extends AbstractController
+class AdminAuthorController extends AbstractController
 {
 
     /**
      * je crée une page /author/create qui porte le nom "author_create"
-     *@Route("/author/create", name="author_create")
+     *@Route("/admin/author/create", name="admin_author_create")
      */
-    public function createAuthor(EntityManagerInterface $entityManager)
+    public function createAuthor(Request $request, EntityManagerInterface $entityManager)
     {
         // Je créé une nouvelle instance de la classe Author (de l'entité Author)
         // dans le but de l'enregistrer en bdd valeurs via les methodes "setter"
         // Doctrine prendra l'entité avec les valeurs de chacune des propriétés
         // et créera un enregistrement dans la table Author
         $author = new Author();
-        $author->setFirstName("Jo");
-        $author->setLastName("Nesbo");
-        // une fois l'entité créée, j'utilise la classe EntityManager
-        // je demande à Symfony de l'instancier pour moi (grâce au système
-        // d'autowire)
-        // cette classe me permet de persister mon entité (de préparer sa sauvegarde
-        // en bdd), puis d'effectuer l'enregistrement (génère et éxecute une requête SQL)
-        $entityManager->persist($author);
-        $entityManager->flush();
+        // j'utilise la methode creatForm de la classe AbstractController pour que symfony créé un formulaire
+        // par rapport à $Author
+        $form = $this->createForm(AuthorType::class, $author);
+        // avec la methode handleRequest j'associe le formulaire à $request
+        $form->handleRequest($request);
+        //  avec la methode isSubmitted je verifie si le formulaire a été soumis et avec la methode isValid verifie sa validité
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        return $this->render('author_create.html.twig');
+            // cette classe permet de préparer sa sauvegarde en bdd
+            $entityManager->persist($author);
+
+            // cette classe permet de génèrer et éxecuter la requête SQL
+            $entityManager->flush();
+        }
+        // je renvoie le formulaire créé mis en forme via la methode render sur la page admin/book_create.html.twig
+        return $this->render("admin/author_create.html.twig", [
+            'authorForm' => $form->createView()
+        ]);
 
     }
 
     /**
-     *@Route("/authors", name="authors")
+     *@Route("/admin/authors", name="admin_authors")
      */
     public function showAuthors(AuthorRepository $authorRepository)
     {
         $authors = $authorRepository->findAll();
 
         //je renvoi a twing le tableau via la methode render
-        return $this->render("authors.html.twig", ["authors" => $authors]);
+        return $this->render("admin/authors.html.twig", ["authors" => $authors]);
     }
 
 
     /**
      * Je créé la route /author/{id} mais je ne rajoute pas de requirements car j'ai placé
      * l'autre route /author/create avant celle ci
-     *@Route("/author/{id}", name="author")
+     *@Route("/admin/author/{id}", name="admin_author")
      */
     public function showAuthor($id, AuthorRepository $authorRepository)
     {
         $author = $authorRepository->find($id);
 
         //je renvoi a twing le tableau via la methode render
-        return $this->render("author.html.twig", ["author" => $author]);
+        return $this->render("admin/author.html.twig", ["author" => $author]);
     }
 
     /**
      *  je crée une page update avec un id qui porte le nom "author_update"
-     * @Route("/author/update/{id}", name="author_update")
+     * @Route("/admin/author/update/{id}", name="admin_author_update")
      */
     //  je créé une methose qui fait appel BookRepository et EntityManagerInterface
-    public function authorUpdate($id, AuthorRepository $authorRepository, EntityManagerInterface $entityManager)
+    public function authorUpdate($id, Request $request, AuthorRepository $authorRepository, EntityManagerInterface $entityManager)
     {
         // je mets dans une variable le contenu d'un author avec l id de recuperé dans l'url via la methode
-        // find de la classe $bookRepository
+        // find de la classe $authorRepository
         $author = $authorRepository->find($id);
-        // je modifie le contenu de cette variable via le setter
-        $author->setLastName("Petit");
-        // j'utilise la classe EntityManager , elle me permet de persister mon entité afin de faire la
-        // modification dans la BDD puis j'effectue la modification via Flush qui génère et éxecute la requête SQL
-        $entityManager->persist($author);
-        $entityManager->flush();
-        // puis je me rends a la page author/update
-        return $this->render('author_update.html.twig');
+        $form = $this->createForm(AuthorType::class, $author);
+        // avec la methode handleRequest j'associe le formulaire à $request
+        $form->handleRequest($request);
+        //  avec la methode isSubmitted je verifie si le formulaire a été soumis et avec la methode isValid verifie sa validité
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // cette classe permet de préparer sa sauvegarde en bdd
+            $entityManager->persist($author);
+
+            // cette classe permet de génèrer et éxecuter la requête SQL
+            $entityManager->flush();
+        }
+        // je renvoie le formulaire créé mis en forme via la methode render sur la page admin/author_update.html.twig
+        return $this->render("admin/author_update.html.twig", [
+            'authorForm' => $form->createView()
+        ]);
+
     }
     /**
      * je créé une route /author/delete qui attend un id et porte le nom author_delete
-     *@Route("/author/delete/{id}", name="author_delete")
+     *@Route("/admin/author/delete/{id}", name="admin_author_delete")
      */
     // je créé ne methode avec en parametre l'id, la classe AuthorRepository instanciée dans la variable
     // $authorRepository et la classe EntityManagerInterface qui est instanciée dans la variable $entityManager
@@ -98,7 +115,7 @@ class AuthorController extends AbstractController
         // j'utilise la methode flush de la classe EntityManagerInterface pour appliquer la suppression
         $entityManager->flush();
         //je retourne sur la page author_delete
-        return $this->render('author_delete.html.twig');
+        return $this->redirectToRoute('admin_authors');
     }
 
 }
