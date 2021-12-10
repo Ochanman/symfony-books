@@ -1,0 +1,28 @@
+<div class="form">
+    {{ form_start(bookForm) }}
+    <div class="input-group mb-3">
+        <span id="addon-wrapping">{{ form_label(bookForm.title, 'Titre', {'label_attr': {'class': 'input-group-text'}}) }}</span>
+        {{ form_widget(bookForm.title, {'attr': {'class': 'form-control', 'placeholder': 'titre', 'aria-label': 'titre', 'aria-describedby': 'addon-wrapping'}}) }}
+    </div>
+    <div class="input-group mb-3">
+        {{ form_widget(bookForm.nbPages, {'attr': {'class': 'form-control', 'placeholder': 'nombre de pages', 'aria-label': 'nombre de pages', 'aria-describedby': 'basic-addon2'}}) }}
+        <span id="addon-wrapping">{{ form_label(bookForm.nbPages, 'Nb de pages', {'label_attr': {'class': 'input-group-text'}}) }}</span>
+    </div>
+    <div class="input-group mb-3">
+        <span id="addon-wrapping">{{ form_label(bookForm.publishedAt, 'Date de publication', {'label_attr': {'class': 'input-group-text'}}) }}</span>
+        {{ form_widget(bookForm.publishedAt, {'attr': {'class': 'form-control'}}) }}
+
+    </div>
+    <div class="input-group mb-3">
+        {{ form_widget(bookForm.genre, {'attr': {'class': 'form-control', 'placeholder': 'genre', 'aria-label': 'genre', 'aria-describedby': 'basic-addon2'}}) }}
+        <span id="addon-wrapping">{{ form_label(bookForm.genre, 'Genre', {'label_attr': {'class': 'input-group-text'}}) }}</span>
+    </div>
+    <div class="input-group mb-3">
+        <span id="addon-wrapping">{{ form_label(bookForm.author, 'Auteur', {'label_attr': {'class': 'input-group-text'}}) }}</span>
+        {{ form_widget(bookForm.author, {'attr': {'class': 'form-control', 'placeholder': 'auteur', 'aria-label': 'auteur', 'aria-describedby': 'addon-wrapping'}}) }}
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Valider</button>
+    </div>
+    {{ form_end(bookForm) }}
+</div>

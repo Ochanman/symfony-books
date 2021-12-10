@@ -170,3 +170,17 @@ main {
         flex-direction: column;
     }
 }
+.form {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin: 5% auto;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: center;
+    width: 30vw;
+    height: 50vh;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: #AAAAAA;
+}
