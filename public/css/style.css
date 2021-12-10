@@ -99,10 +99,10 @@ main {
     grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-    "a  a"
-    "b  b"
-    "c  d"
-    "c  e";
+    "a a a"
+    "b b b"
+    "c e1 d"
+    "c e2 e3";
     text-align: center;
     width: 30%;
     border: 1px solid black;
@@ -137,9 +137,14 @@ main {
     width: 100%;
     margin: auto;
 }
-.lien {
-    
-
+.lien1 {
+    grid-area: e1;
+}
+.lien2 {
+    grid-area: e2;
+}
+.lien3 {
+    grid-area: e3;
 }
 
 #bookImg {
