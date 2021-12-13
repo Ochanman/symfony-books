@@ -38,6 +38,7 @@ class AdminAuthorController extends AbstractController
 
             // cette classe permet de génèrer et éxecuter la requête SQL
             $entityManager->flush();
+            $this->addFlash('success', "l'auteur a bien été créé!");
         }
         // je renvoie le formulaire créé mis en forme via la methode render sur la page admin/book_create.html.twig
         return $this->render("admin/author_create.html.twig", [
@@ -92,6 +93,7 @@ class AdminAuthorController extends AbstractController
 
             // cette classe permet de génèrer et éxecuter la requête SQL
             $entityManager->flush();
+            $this->addFlash('success', "l'auteur a bien été modifié!");
         }
         // je renvoie le formulaire créé mis en forme via la methode render sur la page admin/author_update.html.twig
         return $this->render("admin/author_update.html.twig", [
@@ -114,6 +116,7 @@ class AdminAuthorController extends AbstractController
         $entityManager->remove($author);
         // j'utilise la methode flush de la classe EntityManagerInterface pour appliquer la suppression
         $entityManager->flush();
+        $this->addFlash('success', "l'auteur a bien été supprimé!");
         //je retourne sur la page author_delete
         return $this->redirectToRoute('admin_authors');
     }

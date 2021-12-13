@@ -7,6 +7,7 @@ use App\Entity\Book;
 use App\Entity\Genre;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,7 +19,10 @@ class BookType extends AbstractType
         $builder
             ->add('title')
             ->add('nbPages')
-            ->add('publishedAt')
+            // permet d utiser le widget en forme de calendrier
+            ->add('publishedAt', DateType::class, [
+                'widget' => 'single_text'
+            ])
 
             // j'indique le type à 'genre' qui est EntityType
             ->add('genre', EntityType::class, [

@@ -66,6 +66,7 @@ class AdminBookController extends AbstractController
 
             // cette classe permet de génèrer et éxecuter la requête SQL
             $entityManager->flush();
+            $this->addFlash('success', "le livre a bien été enregistré!");
         }
 
         // je renvoie le formulaire créé mis en forme via la methode render sur la page admin/book_create.html.twig
@@ -128,6 +129,7 @@ class AdminBookController extends AbstractController
 
                 // cette classe permet de génèrer et éxecuter la requête SQL
                 $entityManager->flush();
+                $this->addFlash('success', "le livre a bien été modifié!");
             }
 
             // je renvoie le formulaire créé mis en forme via la methode render sur la page admin/book_create.html.twig
@@ -170,9 +172,30 @@ class AdminBookController extends AbstractController
             $entityManager->remove($book);
         // j'utilise la methode flush de la classe EntityManagerInterface pour appliquer la suppression
             $entityManager->flush();
+            $this->addFlash('success', "le livre a bien été supprimé!");
         //je redirige sur la route books apres avoir supprimé
             return $this->redirectToRoute('admin_books');
         }
+
+        /**
+        * @Route("/admin/search", name="admin_search_books")
+        */
+        // je créé une methode searchBooks utilisant la classe BookRepository et Request
+    public function searchBooks(BookRepository $bookRepository, Request $request)
+    {
+        // je recupére le contenu de l'input de la barre recherche "q" et le mets dans la variable $word
+        $word = $request->query->get('q');
+
+        // je fais la requete SQL dans la BDD via la methode searchByTitle de la classe BookRepository
+        $books = $bookRepository->searchByTitle($word);
+
+        // je retuorne le resultat dans la page admin/books_search.html.twig
+        return $this->render('admin/books_search.html.twig', [
+            'books' => $books
+        ]);
+
+    }
+
 
 
 

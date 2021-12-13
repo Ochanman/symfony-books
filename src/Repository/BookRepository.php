@@ -47,4 +47,22 @@ class BookRepository extends ServiceEntityRepository
         ;
     }
     */
+        // je créé la methode searchByTitle pour faire la requete sql en prenant la variable $word qui est
+        // le resultat de l'input "q"
+    public function searchByTitle($word) {
+
+
+        // j'utilise la methode createQueryBuilder et defini l'alias "book" de la table book
+        $queryBuilder = $this->createQueryBuilder('book');
+
+        // la requete sql s'execute et je recupère le resultat dans la variable $query
+        $query = $queryBuilder->select('book')
+            ->where('book.title LIKE :word')
+            ->setParameter('word', '%'.$word.'%')
+            ->getQuery();
+
+            // je retourne le resultat via la methode getResult()
+        return $query->getResult();
+
+    }
 }

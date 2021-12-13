@@ -40,7 +40,9 @@
     height: 20vh;
     background-color: #C3D63C;
 }
-
+.search {
+    margin: 20px;
+}
 .divlogo {
     width: 10%;
 

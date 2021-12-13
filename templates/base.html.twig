@@ -27,9 +27,20 @@
             <li><a href="{{ path('admin_authors') }}">LES AUTEURS</a></li>
 
         </ul>
+        <form class="search" action="{{ path('admin_search_books') }}">
+            <input type="text" name="q">
+            <input type="submit">
+        </form>
     </nav>
 
 </header>
+
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">
+{{ message }}
+</div>
+{% endfor %}
+
 {# ici un block main pour inserer le block twig selectionné #}
 {% block main %}
 {% endblock main %}
