@@ -1,5 +1,5 @@
 {#je fais appel a la fonction extends qui me permet d inserer le contenu venant de base.html.twig#}
-{% extends "admin/base.html.twig" %}
+{% extends "guest/base.html.twig" %}
 
 {# j'insere le block metatitle mais fait appel a la place du metatitle par defaut le metatitle "Vos livres"   #}
 {% block metatitle %}
@@ -25,9 +25,8 @@
                     <p id="bookAuthor">Ecrit par {{ book.author.firstname }} {{ book.author.lastname }}</p>
                 {% endif %}
                 <p id="bookPublish">Publié le {{ book.publishedAt | date('d/m/y')}}</p>
-                <a class="lien1" href="{{ path('admin_book', {'id': book.id}) }}">Voir ce livre</a>
-                <a class="lien2" href="{{ path('admin_book_update', {'id': book.id}) }}">Mettre à jour</a>
-                <a class="lien3" href="{{ path('admin_book_delete', {'id': book.id}) }}">Supprimer ce livre</a>
+                <a class="lien1" href="{{ path('guest_book', {'id': book.id}) }}">Voir ce livre</a>
+
                 {#<a class="lien" href="{{ path('book', {'id': book.id}) }}"><img id="bookImg" src="{{ book.image }}" alt="{{ book.title }}"></a>#}
             </div>
         {% endfor %}

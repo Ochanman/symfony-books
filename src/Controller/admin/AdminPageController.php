@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\BookRepository;
-/*je fais hériter ma classe PageController de la classe AbstractController de Symfony ce qui me permet d'utiliser dans
+/*je fais hériter ma classe GuestPageController de la classe AbstractController de Symfony ce qui me permet d'utiliser dans
 * ma classe (avec le mot clé $this) des méthodes et propriétés définies dans la classe AbstractController
 */
 
-class PageController extends AbstractController
+class AdminPageController extends AbstractController
 {
 /*je crée une propriété privé $book qui contiendra la liste de tous les livres afin de repetéer cette variable dans
  toutes les methodes*/
@@ -27,9 +27,9 @@ class PageController extends AbstractController
 
     /**
      * je crée une page racine qui porte le nom "home"
-     * @Route("/", name="home")
+     * @Route("/admin", name="dashboard")
      */
-    public function home(BookRepository $bookRepository)
+    public function dashboard(BookRepository $bookRepository)
     {
 
         // je veux utiliser un fichier HTML en tant que réponse
@@ -41,7 +41,7 @@ class PageController extends AbstractController
 //        return $this->render("home.html.twig", ["books" => $output = array_slice($this->books, -3, 3)]);
 
         $home = $bookRepository->findBy([], ['id' => 'DESC'],3);
-        return $this->render("home.html.twig", ["home" => $home]);
+        return $this->render("admin/dashboard.html.twig", ["home" => $home]);
 
     }
 

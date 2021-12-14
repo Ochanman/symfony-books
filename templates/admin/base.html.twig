@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    {# je créé un block metatitle qui par defaut affichera "Votre Bibliothèque" #}
+    <title>{% block metatitle %} Votre Bibliothèque {% endblock metatitle %} pour ceux qui aiment lire!</title>
+    {# je créé un block qui par defaut prendra ce style css, ce block sert de variable qui pourra etre inserer dans une page html et etre modifiée #}
+    {% block css %}
+        <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
+    {% endblock css %}
+</head>
+<body>
+<header class="header">
+    <div class="divlogo">
+
+        <img class="logo" src="{{ asset('img/logo.png') }}" alt="logo de bibliotheque"
+        />
+    </div>
+    <nav>
+        <ul class="main-menu">
+            <li><a href="{{ path('dashboard') }}">ACCUEIL</a></li>
+
+            <li><a href="{{ path('admin_books') }}">LISTE DES LIVRES</a></li>
+
+            <li><a href="{{ path('admin_authors') }}">LES AUTEURS</a></li>
+
+            <li><a href="{{ path('app_logout') }}">DECONNEXION</a></li>
+        </ul>
+        <p>Vous êtes connecté en tant que {{  app.user.email }}</p>
+
+        <form class="search" action="{{ path('admin_search_books') }}">
+            <input type="text" name="q">
+            <input type="submit">
+        </form>
+    </nav>
+
+</header>
+
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">
+{{ message }}
+</div>
+{% endfor %}
+
+{# ici un block main pour inserer le block twig selectionné #}
+{% block main %}
+{% endblock main %}
+<footer>
+    <section class="foot">
+
+        <nav>
+            <ul class="footer-menu">
+                <li><a href="{{ path('dashboard') }}">accueil</a></li>
+
+                <li><a href="{{ path('admin_books') }}">liste des livres</a></li>
+
+            </ul>
+        </nav>
+    </section>
+</footer>
+<script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"
+></script>
+</body>
+</html>

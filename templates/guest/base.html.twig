@@ -22,15 +22,13 @@
         <ul class="main-menu">
             <li><a href="{{ path('home') }}">ACCUEIL</a></li>
 
-            <li><a href="{{ path('admin_books') }}">LISTE DES LIVRES</a></li>
+            <li><a href="{{ path('guest_books') }}">LISTE DES LIVRES</a></li>
 
-            <li><a href="{{ path('admin_authors') }}">LES AUTEURS</a></li>
+            <li><a href="{{ path('guest_authors') }}">LES AUTEURS</a></li>
 
+            <li><a href="{{ path('login') }}">SE CONNECTER</a></li>
         </ul>
-        <form class="search" action="{{ path('admin_search_books') }}">
-            <input type="text" name="q">
-            <input type="submit">
-        </form>
+        <p>Vous n'êtes pas connecté!</p>
     </nav>
 
 </header>
@@ -51,7 +49,7 @@
             <ul class="footer-menu">
                 <li><a href="{{ path('home') }}">accueil</a></li>
 
-                <li><a href="{{ path('admin_books') }}">liste des livres</a></li>
+                <li><a href="{{ path('guest_books') }}">liste des livres</a></li>
 
             </ul>
         </nav>

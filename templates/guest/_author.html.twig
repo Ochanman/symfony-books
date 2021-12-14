@@ -1,0 +1,14 @@
+{# je crée cette section afin de faire un include dans mon fichier author.html.twig #}
+<section class="boxBook">
+    <div id="contentBook">
+        <h1 id="bookTitle">Auteur</h1>
+        <p id="bookAuthor">{{ author.lastname }} {{ author.firstname }}</p>
+        {% if author.deathdate %}
+        <p id="bookPublish">Décédé le {{ author.deathdate | date('d/m/Y')}}</p>
+        {% endif %}
+        {% for book in author.books %}
+            <p>Cet auteur a ecrit: {{ book.title }}</p>
+        {% endfor %}
+        {#                    <a class="lien" href="{{ path('book', {'id': book.id}) }}"><img id="bookImg" src="{{ book.image }}" alt="{{ book.title }}"></a>#}
+    </div>
+</section>

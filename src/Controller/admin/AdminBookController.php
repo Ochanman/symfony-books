@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 //j'ajoute le parametre App\Entity\Book pour pouvoir utiliser la classe Book
 use App\Entity\Book;
 use App\Form\BookType;

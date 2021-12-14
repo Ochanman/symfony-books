@@ -52,7 +52,10 @@ class BookRepository extends ServiceEntityRepository
     public function searchByTitle($word) {
 
 
-        // j'utilise la methode createQueryBuilder et defini l'alias "book" de la table book
+        // je demande à Doctrine de créer une requête SQL
+        // qui fait une requête SELECT sur la table book
+        // à condition que le titre du book
+        // contiennent le contenu de $word (à un endroit ou à un autre, grâce à LIKE %xxxx%)
         $queryBuilder = $this->createQueryBuilder('book');
 
         // la requete sql s'execute et je recupère le resultat dans la variable $query

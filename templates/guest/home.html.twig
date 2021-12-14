@@ -1,0 +1,21 @@
+{# je fais appel a la fonction extends qui me permet d inserer le contenu venant de base.html.twig #}
+{% extends "guest/base.html.twig" %}
+
+{# j'insere le block main qui permet de mettre du contenu dans le main de ma page home #}
+{# dans ce block la boucle for va permettre d'afficher tout le contenu du $array selectionné dans GuestPageController.php #}
+{% block main %}
+    <section class="boxBook">
+        {% for book in home %}
+            <div id="contentBook">
+                <h1 id="bookTitle">{{ book.title }}</h1>
+                {% if book.author %}
+                <p id="bookAuthor">Ecrit par {{ book.author.firstname }} {{ book.author.lastname }}</p>
+                {% endif %}
+                <p id="bookPublish">Publié le {{ book.publishedAt | date('d/m/y') }}</p>
+                <a class="lien" href="{{ path('guest_book', {'id': book.id}) }}">
+{#                    <img id="bookImg" src="{{ admin_book.image }}" alt="{{ book.title }}">#}
+                </a>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock main %}

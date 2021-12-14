@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 //j'ajoute le parametre App\Entity\Author pour pouvoir utiliser la classe Author
 use App\Entity\Author;
 use App\Form\AuthorType;

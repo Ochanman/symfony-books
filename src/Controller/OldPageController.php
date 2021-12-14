@@ -5,11 +5,11 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\BookRepository;
-/*je fais hériter ma classe PageController de la classe AbstractController de Symfony ce qui me permet d'utiliser dans
+/*je fais hériter ma classe GuestPageController de la classe AbstractController de Symfony ce qui me permet d'utiliser dans
 * ma classe (avec le mot clé $this) des méthodes et propriétés définies dans la classe AbstractController
 */
 
-class PageController extends AbstractController
+class OldPageController extends AbstractController
 {
     /**
      * je crée une page racine qui porte le nom "home"
